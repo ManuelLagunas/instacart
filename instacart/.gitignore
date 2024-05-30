@@ -1,4 +1,10 @@
 # Extensiones generales
+.Rproj.user
+.Rhistory
+.Rdata
+.httr-oauth
+.DS_Store
+.quarto
 /.quarto/
 *.RData
 *.RDS
@@ -22,7 +28,8 @@
 *.pmml
 *.jar
 *.cfg
-*.DS_Store
+*.csv
+
 
 # R
 

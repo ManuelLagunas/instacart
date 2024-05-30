@@ -3,6 +3,10 @@ project:
 
 manuscript:
   article: index.qmd
+  
+  notebooks:
+  - notebook: notebooks/eda_orders.qmd
+    title: EDA orders
 
 format:
   html:
