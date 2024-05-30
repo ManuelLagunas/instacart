@@ -9,6 +9,12 @@ manuscript:
     title: EDA Orders
   - notebook: notebooks/eda_aisles.qmd
     title: EDA Aisles
+  - notebook: notebooks/eda_departments.qmd
+    title: EDA Departments
+  - notebook: notebooks/eda_products.qmd
+    title: EDA Products
+  - notebook: notebooks/eda_order_products.qmd
+    title: EDA Order-Products
 
   code-links:
     - text: GitHub
@@ -26,7 +32,7 @@ format:
   # pdf: default
 
 execute:
-  freeze: true
+  freeze: auto
 
 
 
