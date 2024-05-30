@@ -6,7 +6,14 @@ manuscript:
   
   notebooks:
   - notebook: notebooks/eda_orders.qmd
-    title: EDA orders
+    title: EDA Orders
+  - notebook: notebooks/eda_aisles.qmd
+    title: EDA Aisles
+
+  code-links:
+    - text: GitHub
+      icon: github
+      href: https://github.com/ManuelLagunas/instacart.git
 
 format:
   html:
