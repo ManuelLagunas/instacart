@@ -1,0 +1,12 @@
+---
+title: Estudio del comportamiento del consumidor de los usuarios de la app de compra de viveres a domicilio Instacart
+authors:
+  - name: Manuel Lagunas
+    roles:
+    - Data scientist
+    corresponding: true
+bibliography: references.bib
+---
+
+## Section
+This is a simple placeholder for the manuscript's main document [@knuth84].
