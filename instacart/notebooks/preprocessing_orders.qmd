@@ -1,0 +1,86 @@
+---
+title: "Preprocessing orders"
+format: html
+---
+
+ ---------- libraries ---------
+```{python}
+import pandas as pd
+import numpy as np
+```
+
+ ---------- read data ----------
+```{python}
+df = pd.read_csv('datasets/instacart_orders_raw.csv', sep=';')
+```
+
+ ---------- preprocessing ----------
+
+ duplicated data ----------
+```{python}
+df[df.duplicated()]
+```
+
+```{python}
+print('El numero de valores duplicados es:',df.duplicated().sum())
+```
+
+Los valores duplicados tienen en comun que son del dia miercoles a las 2, por lo que seria bueno estudiar mas a fondo esta hipotesis preio a dar alguna solucion
+
+duplicated data study ----------
+
+Hipotesis: Todos los pedisos duplicados se realizaron el día miercoles a las 2
+
+```{python}
+df[(df['order_dow'] == 3) & (df['order_hour_of_day']==2)]
+```
+La hipotesis es correcta. Lo que suguiere que se puede tratar de un error temporal en el sistema de captura de datos
+
+duplicated data elimination ----------
+
+```{python}
+df = df.drop_duplicates().reset_index(drop=True)
+duplicates = df[df.duplicated()]
+print(duplicates)
+print()
+print('El numero de valores duplicados es:',df.duplicated().sum())
+```
+Se encontraron y eliminaron 15 valores duplicados
+
+missing data ----------
+```{python}
+print('Numero de valores ausentes')
+print(df.isna().sum())
+```
+
+```{python}
+print('Porcentaje que representan de valores ausentes')
+print((df.isna().sum()/df.shape[0]) * 100)
+```
+Los valores ausentes pertenecen a la columna de days_since_prior_order por lo que sugiere que los valores ausentes son registros asociados al primer pedido. Ya que no habrá días después de la primera orden si el registro corresponde precisamente a la primer orden. Por lo que los valores ausentes se pueden inputar con el valor 0.
+
+```{python}
+df['days_since_prior_order'] = df['days_since_prior_order'].fillna(0)
+print('El numero de valores duplicados es:',df.duplicated().sum())
+```
+
+data types ----------
+
+```{python}
+df.info()
+```
+
+```{python}
+df['order_id'] = df['order_id'].astype('str')
+df['user_id'] = df['user_id'].astype('str')
+df['days_since_prior_order'] = df['days_since_prior_order'].astype('int')
+```
+
+```{python}
+df.info()
+```
+
+ ---------- save data ----------
+```{python}
+df.to_csv('datasets/clean_orders.csv', index=False)
+```

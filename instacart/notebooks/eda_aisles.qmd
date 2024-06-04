@@ -18,3 +18,8 @@ df = pd.read_csv('datasets/aisles.csv', sep=';')
 ```{python}
 ProfileReport(df)
 ```
+
+---------- save data ----------
+```{python}
+# profile.to_file(output_file="eda_aisles.html")
+```
