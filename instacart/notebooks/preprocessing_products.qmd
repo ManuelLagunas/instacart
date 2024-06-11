@@ -1,0 +1,92 @@
+---
+title: "Preprocessing Products "
+format: 
+    html:
+        toc: true
+        toc-depth: 4
+---
+
+# Libraries
+```{python}
+#  ---------- libraries ---------
+import pandas as pd
+```
+
+# Read Data
+```{python}
+# ---------- read data ----------
+df = pd.read_csv('datasets/products_raw.csv', sep=';')
+df_aisles = pd.read_csv('datasets/aisles_raw.csv', sep=';')
+df_departments = pd.read_csv('datasets/departments_raw.csv', sep=';')
+```
+
+# Preprocessing
+
+## Data type
+```{python}
+# data type ----------
+df = df.astype('str')
+df.info()
+```
+
+## Duplicated data
+```{python}
+# duplicated data ----------
+df[df.duplicated()]
+```
+```{python}
+print('El numero de valores duplicados es:',df.duplicated().sum())
+print()
+```
+```{python}
+# Duplicated data products names
+df['product_name']=df['product_name'].str.lower()
+print('El numero de nombres duplicados es:', df['product_name'].duplicated().sum())
+print()
+print('Los valores duplicados son:')
+print()
+duplicated_product_names = df['product_name'][df['product_name'].duplicated()].value_counts().to_frame().reset_index()
+duplicated_product_names.columns = ['product_name', 'count']
+duplicated_product_names
+```
+**Conclusión** Los datos demuestran que existen nombres duplicados, que considero no  opresentan mayor problema ya que tienen diferentes product_id, lo que persivo es que la mayoria de valores duplicados son valores Nan por lo que se debe decidir que hacer con estos
+
+## Missing data
+**Hipotesis** Los valores ausentes en la columna product_name estan relacionados con el pasillo con id 100 y con el departamento con id 21
+```{python}
+# Aislar los datos nulos
+df_nan_product_name = df[df['product_name'] == 'nan']
+df_nan_product_name
+```
+
+```{python}
+# Son todos los valores de aisle_id 100?
+all_aisle_id_100 = (df_nan_product_name['aisle_id'] == '100').all()
+print('¿Son todos los valores de la columna aisle_id 100?',all_aisle_id_100)
+```
+```{python}
+# Son todos los valores de department_id 21?
+all_department_id_21 = (df_nan_product_name['department_id'] == '21').all()
+print('¿Son todos los valores de la columna department_id 21?',all_department_id_21)
+```
+**Conclusión** Los valores ausentes corresponden todos a el pasillo 100 y el departamento 21 Por lo que se tiene que hacer un estudio en los demas dataframes para tratar de descubrir a que se refieren estos vaslores
+
+### Missing data study 
+```{python}
+# Busqueda de que departamento corresponde
+print(df_departments.loc[20,'department'])
+print(df_aisles.loc[99,'aisle'])
+```
+**Conclusión** Los valores arrojados por el estudio son missing, por lo que serán imputados en los valores ausentes.
+
+```{python}
+# 
+df['product_name']=df['product_name'].fillna('missing')
+print('el numero de valores ausentes del dataframe es:\n',df.isnull().sum())
+```
+
+# Save data
+```{python}
+# ---------- save data ----------
+df.to_csv('datasets/clean_products.csv', index=False)
+```

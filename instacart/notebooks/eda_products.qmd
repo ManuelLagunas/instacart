@@ -11,7 +11,7 @@ from ydata_profiling import ProfileReport
 
 ---------- read data ----------
 ```{python}
-df = pd.read_csv('datasets/products.csv', sep=';')
+df = pd.read_csv('datasets/products_raw.csv', sep=';')
 ```
 
 ---------- eda ----------
