@@ -17,6 +17,8 @@ manuscript:
     title: EDA Order-Products
   - notebook: notebooks/preprocessing_orders.qmd
     title: Preprocessing Orders
+  - notebook: notebooks/preprocessing_products.qmd
+    title: Preprocessing Products
 
   code-links:
     - text: GitHub

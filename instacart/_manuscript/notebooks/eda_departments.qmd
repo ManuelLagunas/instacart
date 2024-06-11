@@ -1,0 +1,20 @@
+---
+title: "EDA Departments"
+format: html
+---
+
+---------- libreries ---------
+```{python}
+import pandas as pd
+from ydata_profiling import ProfileReport
+```
+
+---------- read data ----------
+```{python}
+df = pd.read_csv('datasets/departments_raw.csv', sep=';')
+```
+
+---------- eda ----------
+```{python}
+ProfileReport(df)
+```
