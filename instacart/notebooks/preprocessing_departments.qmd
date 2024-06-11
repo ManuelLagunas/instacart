@@ -16,7 +16,7 @@ import pandas as pd
 ## Leer los datos
 ```{python}
 # ---------- read data ----------
-df = pd.read_csv('datasets/aisles_raw.csv', sep=';')
+df = pd.read_csv('datasets/departments_raw.csv', sep=';')
 ```
 
 ## Procesamiento de datos
@@ -24,7 +24,7 @@ df = pd.read_csv('datasets/aisles_raw.csv', sep=';')
 ### Tipo de datos
 ```{python}
 df = df.astype('str')
-df['aisle']=df['aisle'].str.lower()
+df['department']=df['department'].str.lower()
 df.info()
 ```
 
@@ -52,5 +52,5 @@ print("El numero de valores duplicados es:", duplicate_count)
 ## Guardar los datos
 ```{python}
 # ---------- save data ----------
-df.to_csv('datasets/clean_aisles.csv', index=False)
+df.to_csv('datasets/clean_departments.csv', index=False)
 ```

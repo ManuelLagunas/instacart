@@ -19,6 +19,10 @@ manuscript:
     title: Preprocessing Orders
   - notebook: notebooks/preprocessing_products.qmd
     title: Preprocessing Products
+  - notebook: notebooks/preprocessing_aisles.qmd
+    title: Preprocessing Aisles
+  - notebook: notebooks/preprocessing_departments.qmd
+    title: Preprocessing Departments
 
   code-links:
     - text: GitHub
